@@ -72,7 +72,13 @@ export function Panel({
   );
 }
 
-export function MicroLabel({ children, className }: { children: ReactNode; className?: string }) {
+export function MicroLabel({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string | undefined;
+}) {
   return <p className={cn("micro text-ink-soft", className)}>{children}</p>;
 }
 
