@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppActivityRouteImport } from './routes/app.activity'
+import { Route as AppCompareRouteImport } from './routes/app.compare'
 import { Route as AppGuardRouteImport } from './routes/app.guard'
 import { Route as AppQuoteRouteImport } from './routes/app.quote'
 
@@ -36,6 +37,11 @@ const AppActivityRoute = AppActivityRouteImport.update({
   path: '/activity',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCompareRoute = AppCompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppGuardRoute = AppGuardRouteImport.update({
   id: '/guard',
   path: '/guard',
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/app/activity': typeof AppActivityRoute
+  '/app/compare': typeof AppCompareRoute
   '/app/guard': typeof AppGuardRoute
   '/app/quote': typeof AppQuoteRoute
   '/app/': typeof AppIndexRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/app/activity': typeof AppActivityRoute
+  '/app/compare': typeof AppCompareRoute
   '/app/guard': typeof AppGuardRoute
   '/app/quote': typeof AppQuoteRoute
   '/app': typeof AppIndexRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/app/activity': typeof AppActivityRoute
+  '/app/compare': typeof AppCompareRoute
   '/app/guard': typeof AppGuardRoute
   '/app/quote': typeof AppQuoteRoute
   '/app/': typeof AppIndexRoute
@@ -74,14 +83,27 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/app' | '/app/activity' | '/app/guard' | '/app/quote' | '/app/'
+    | '/'
+    | '/app'
+    | '/app/activity'
+    | '/app/compare'
+    | '/app/guard'
+    | '/app/quote'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app/activity' | '/app/guard' | '/app/quote' | '/app'
+  to:
+    | '/'
+    | '/app/activity'
+    | '/app/compare'
+    | '/app/guard'
+    | '/app/quote'
+    | '/app'
   id:
     | '__root__'
     | '/'
     | '/app'
     | '/app/activity'
+    | '/app/compare'
     | '/app/guard'
     | '/app/quote'
     | '/app/'
@@ -122,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppActivityRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/compare': {
+      id: '/app/compare'
+      path: '/compare'
+      fullPath: '/app/compare'
+      preLoaderRoute: typeof AppCompareRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/guard': {
       id: '/app/guard'
       path: '/guard'
@@ -141,6 +170,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppActivityRoute: typeof AppActivityRoute
+  AppCompareRoute: typeof AppCompareRoute
   AppGuardRoute: typeof AppGuardRoute
   AppQuoteRoute: typeof AppQuoteRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -148,6 +178,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppActivityRoute: AppActivityRoute,
+  AppCompareRoute: AppCompareRoute,
   AppGuardRoute: AppGuardRoute,
   AppQuoteRoute: AppQuoteRoute,
   AppIndexRoute: AppIndexRoute,
