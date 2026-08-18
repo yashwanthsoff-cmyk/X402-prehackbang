@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppActivityRouteImport } from './routes/app.activity'
+import { Route as AppCompareRouteImport } from './routes/app.compare'
+import { Route as AppGuardRouteImport } from './routes/app.guard'
+import { Route as AppQuoteRouteImport } from './routes/app.quote'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,28 +32,81 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppActivityRoute = AppActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCompareRoute = AppCompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGuardRoute = AppGuardRouteImport.update({
+  id: '/guard',
+  path: '/guard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuoteRoute = AppQuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/activity': typeof AppActivityRoute
+  '/app/compare': typeof AppCompareRoute
+  '/app/guard': typeof AppGuardRoute
+  '/app/quote': typeof AppQuoteRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/activity': typeof AppActivityRoute
+  '/app/compare': typeof AppCompareRoute
+  '/app/guard': typeof AppGuardRoute
+  '/app/quote': typeof AppQuoteRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/activity': typeof AppActivityRoute
+  '/app/compare': typeof AppCompareRoute
+  '/app/guard': typeof AppGuardRoute
+  '/app/quote': typeof AppQuoteRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/activity'
+    | '/app/compare'
+    | '/app/guard'
+    | '/app/quote'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app'
-  id: '__root__' | '/' | '/app' | '/app/'
+  to:
+    | '/'
+    | '/app/activity'
+    | '/app/compare'
+    | '/app/guard'
+    | '/app/quote'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/activity'
+    | '/app/compare'
+    | '/app/guard'
+    | '/app/quote'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,14 +137,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/activity': {
+      id: '/app/activity'
+      path: '/activity'
+      fullPath: '/app/activity'
+      preLoaderRoute: typeof AppActivityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/compare': {
+      id: '/app/compare'
+      path: '/compare'
+      fullPath: '/app/compare'
+      preLoaderRoute: typeof AppCompareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/guard': {
+      id: '/app/guard'
+      path: '/guard'
+      fullPath: '/app/guard'
+      preLoaderRoute: typeof AppGuardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/quote': {
+      id: '/app/quote'
+      path: '/quote'
+      fullPath: '/app/quote'
+      preLoaderRoute: typeof AppQuoteRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppActivityRoute: typeof AppActivityRoute
+  AppCompareRoute: typeof AppCompareRoute
+  AppGuardRoute: typeof AppGuardRoute
+  AppQuoteRoute: typeof AppQuoteRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppActivityRoute: AppActivityRoute,
+  AppCompareRoute: AppCompareRoute,
+  AppGuardRoute: AppGuardRoute,
+  AppQuoteRoute: AppQuoteRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
